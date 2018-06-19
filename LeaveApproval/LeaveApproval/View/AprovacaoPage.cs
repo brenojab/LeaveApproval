@@ -17,6 +17,17 @@ namespace LeaveApproval.View
       Content = GetMainStack();
       this.BackgroundColor = Constants.DEFAULT_MAIN_BACKGROUND_COLOR;
 
+      try
+      {
+        throw new Exception("AppCenter exception!");
+      }
+      catch (Exception exception)
+      {
+        var properties = new Dictionary<string, string> { { "Category", "Music" }, { "Wifi", "On" } };
+
+        Microsoft.AppCenter.Crashes.Crashes.TrackError(exception, properties);
+      }
+
     }
 
     private StackLayout GetMainStack()
@@ -58,7 +69,7 @@ namespace LeaveApproval.View
         Source = "https://t3.ftcdn.net/jpg/01/18/06/32/240_F_118063283_FD6CvzN1v1LFEMupsqEfuOkPbfjuO0CU.jpg",
         HeightRequest = 250,
         WidthRequest = 250
-        
+
       };
 
       Image btnApprove = new Image()
@@ -94,7 +105,7 @@ namespace LeaveApproval.View
       {
         VerticalOptions = LayoutOptions.FillAndExpand,
         HorizontalOptions = LayoutOptions.FillAndExpand,
-        
+
         Children =
         {
           lblData, lblPergunta, profileImage, insideStack
